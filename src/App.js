@@ -6,6 +6,7 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 import Profile from "./pages/profile";
 import Tweet from "./pages/tweet";
+import TweetDetail from "./pages/tweet-detail";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/tweet",
     element: <Tweet></Tweet>,
+  },
+  {
+    path: "/tweet/:id",
+    element: <TweetDetail></TweetDetail>,
   },
   {
     path: "/profile",
