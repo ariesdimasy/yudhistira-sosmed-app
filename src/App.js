@@ -22,11 +22,11 @@ const router = createBrowserRouter([
     element: <Register></Register>,
   },
   {
-    path: "/tweet",
+    path: "/tweets",
     element: <Tweet></Tweet>,
   },
   {
-    path: "/tweet/:id",
+    path: "/tweets/:id",
     element: <TweetDetail></TweetDetail>,
   },
   {
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
     element: <Profile></Profile>,
   },
   {
-    path: "/profile/:id",
+    path: "/profile/:username",
     element: <Profile></Profile>,
   },
 ]);

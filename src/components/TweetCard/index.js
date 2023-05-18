@@ -5,18 +5,32 @@ export default function TweetCard(props) {
   return (
     <Col span={24} className="tweet-card">
       <Card
-        title="Card title"
-        extra={<a href="#"> Edit </a>}
+        title={props.tweet.User.name}
+        extra={
+          props.isDetail ? (
+            <a href={`/tweets/${props.tweet.id}`}> Detail </a>
+          ) : (
+            props.isEdit && (
+              <a
+                href="#"
+                onClick={() => {
+                  props.setEdit(true);
+                }}
+              >
+                {" "}
+                Edit{" "}
+              </a>
+            )
+          )
+        }
         bordered={false}
         cover={
-          <img
-            alt="example"
-            src="https://www.seiu1000.org/sites/main/files/main-images/camera_lense_0.jpeg"
-            width={"100%"}
-          />
+          props.tweet.imageUrl && (
+            <img alt="example" src={props.tweet.imageUrl} width={"100%"} />
+          )
         }
       >
-        {props.tweet}
+        {props.tweet.tweet}
       </Card>
     </Col>
   );

@@ -1,4 +1,4 @@
-import { Card, Form, Input } from "antd";
+import { Button, Card, Form, Input } from "antd";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
@@ -11,11 +11,11 @@ const TweetSchema = yup.object().shape({
   image_url: yup.string().url("Image must be url"),
 });
 
-export default function TweetForm() {
+export default function TweetForm(props) {
   const formik = useFormik({
     initialValues: {
-      tweet: "",
-      image_url: "",
+      tweet: props?.tweet?.tweet || "",
+      image_url: props?.tweet?.imageUrl || "",
     },
     validationSchema: TweetSchema,
     onSubmit: (values) => {
@@ -55,6 +55,11 @@ export default function TweetForm() {
               {formik.errors.image_url}
             </span>
           )}
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            {props.isEdit ? "Update Tweet" : "Post Tweet"}
+          </Button>
         </Form.Item>
       </Form>
     </Card>

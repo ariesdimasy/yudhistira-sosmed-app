@@ -16,7 +16,16 @@ export default function MyHeader() {
       }}
     >
       <div className="demo-logo">Yudhistira Media</div>
-      <Menu theme="dark" mode="horizontal" />
+      <Menu
+        theme="dark"
+        mode="vertical"
+        items={[
+          {
+            label: <a href="/tweets">Tweets</a>,
+            key: "tweet",
+          },
+        ]}
+      />
     </Header>
   );
 }
