@@ -5,7 +5,7 @@ export default function TweetCard(props) {
   return (
     <Col span={24} className="tweet-card">
       <Card
-        title={props.tweet.User.name}
+        title={props.tweet.user?.name}
         extra={
           props.isDetail ? (
             <a href={`/tweets/${props.tweet.id}`}> Detail </a>

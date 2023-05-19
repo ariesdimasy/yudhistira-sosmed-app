@@ -8,20 +8,23 @@ export function loginProcess(data) {
       password: data.password,
     },
     {
-      headers: {},
+      headers: {
+
+      },
     }
   );
 }
 
 export function registerProcess(data) {
   return axios.post(
-    process.env.REACT_APP_API_URL + "/auth/login",
+    process.env.REACT_APP_API_URL + "/auth/register",
     {
       name: data.name,
       username: data.username,
       email: data.email,
       phoneNumber: data.phoneNumber,
       password: data.password,
+      password_confirm: data.password_confirm
     },
     {
       headers: {},

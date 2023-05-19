@@ -1,7 +1,9 @@
 import React from "react";
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import { Button, Col, Form, Input, Row } from "antd";
+import { Col, Form, Input, Row } from "antd";
+import { registerProcess } from "../../api/auth";
 import "./index.css";
 
 const RegisterSchema = yup.object().shape({
@@ -28,6 +30,7 @@ const RegisterSchema = yup.object().shape({
 });
 
 export default function Register() {
+  const navigate = useNavigate()
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -41,6 +44,17 @@ export default function Register() {
     onSubmit: (values) => {
       // same shape as initial values
       console.log("values => ", values);
+      registerProcess(values).then(res => {
+        if(res.data.success) { 
+        
+          navigate("/login")
+        } else { 
+          alert(JSON.stringify(res.data.message))
+        }
+      })
+      .catch(err => {
+        alert(JSON.stringify(err))
+      }) 
     },
   });
   return (
@@ -48,7 +62,7 @@ export default function Register() {
       <Col xs={24} sm={24} xl={24}>
         <h1>Register</h1>
 
-        <Form layout="vertical" onSubmit={formik.handleSubmit}>
+        <form method="post" layout="vertical" onSubmit={formik.handleSubmit}>
           <Form.Item label="Name">
             <Input
               type="text"
@@ -134,14 +148,17 @@ export default function Register() {
           </Form.Item>
 
           <div>
-            <Button type="primary" htmlType="submit">
+            {/* <Button type="primary" htmlType="submit">
               Register
-            </Button>
+            </Button> */}
+            <button type="submit">
+              Register
+            </button>
           </div>
           <div className="login-link">
             <a href="/login"> Already had Account ? Login here </a>
           </div>
-        </Form>
+        </form>
       </Col>
     </Row>
   );
