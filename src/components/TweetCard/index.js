@@ -1,6 +1,8 @@
 import { Card, Col } from "antd";
 import "./index.css";
 
+import { baseUrl } from "../../helper";
+
 export default function TweetCard(props) {
   return (
     <Col span={24} className="tweet-card">
@@ -25,8 +27,8 @@ export default function TweetCard(props) {
         }
         bordered={false}
         cover={
-          props.tweet.imageUrl && (
-            <img alt="example" src={props.tweet.imageUrl} width={"100%"} />
+          (
+            <img alt="example" src={baseUrl('/PIMG-1684731754974.jpeg')} width={"100%"} />
           )
         }
       >

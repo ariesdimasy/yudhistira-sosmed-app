@@ -1,6 +1,7 @@
 import { Button, Card, Form, Input } from "antd";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { postTweet } from "../../api/tweet";
 
 const TweetSchema = yup.object().shape({
   tweet: yup
@@ -20,12 +21,25 @@ export default function TweetForm(props) {
     validationSchema: TweetSchema,
     onSubmit: (values) => {
       console.log(values);
+      postTweet({
+        tweet:values.tweet,
+        imageUrl:values.image_url
+      })
+      .then(res => {
+        if(res.data.success) { 
+          alert(res.data.message)
+          
+        }
+      })
+      .catch(err => {
+        alert(JSON.stringify(err))
+      })
     },
   });
 
   return (
     <Card>
-      <Form layout="vertical">
+      <Form layout="vertical" onFinish={formik.handleSubmit}>
         <Form.Item label="tweet" htmlFor="tweet">
           <Input.TextArea
             id="tweet"

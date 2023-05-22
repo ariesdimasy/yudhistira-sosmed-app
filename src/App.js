@@ -1,5 +1,5 @@
 import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, useNavigate, Navigate} from "react-router-dom";
 
 import Layout from "./layout";
 import Login from "./pages/login";
@@ -7,6 +7,30 @@ import Register from "./pages/register";
 import Profile from "./pages/profile";
 import Tweet from "./pages/tweet";
 import TweetDetail from "./pages/tweet-detail";
+import Unauthorized from "./pages/unauthorized";
+
+const PrivateRoute = (props) => {
+  const userLogin = localStorage.getItem("userLogin") ? JSON.parse(localStorage.getItem("userLogin")) : {}
+  //const navigate = useNavigate()
+  if(userLogin?.token) { 
+    return props.children
+  } else { 
+    //return navigate("/login")
+    return <Navigate to={'/login'} />
+    //window.location.href = 'http://localhost:3000/'
+  }
+}
+
+const PublicRoute = ({children}) => {
+  const userLogin = localStorage.getItem("userLogin") ? JSON.parse(localStorage.getItem("userLogin")) : {}
+  //const navigate = useNavigate()
+  if(userLogin?.token) { 
+    return <Navigate to="/tweets"/>
+  } else { 
+    return children
+    //window.location.href = 'http://localhost:3000/'
+  }
+} 
 
 const router = createBrowserRouter([
   {
@@ -15,7 +39,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login />,
+    element: <PublicRoute><Login /></PublicRoute>,
   },
   {
     path: "/register",
@@ -23,7 +47,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/tweets",
-    element: <Tweet></Tweet>,
+    element: (
+      <PrivateRoute>
+        <Tweet></Tweet>
+      </PrivateRoute>
+    ),
   },
   {
     path: "/tweets/:id",
@@ -36,6 +64,10 @@ const router = createBrowserRouter([
   {
     path: "/profile/:username",
     element: <Profile></Profile>,
+  },
+  {
+    path: "/test",
+    element: <Unauthorized />,
   },
 ]);
 
