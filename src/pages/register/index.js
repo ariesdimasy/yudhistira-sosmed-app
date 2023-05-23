@@ -2,7 +2,7 @@ import React from "react";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import { Col, Form, Input, Row } from "antd";
+import {Button, Col, Form, Input, Row } from "antd";
 import { registerProcess } from "../../api/auth";
 import "./index.css";
 
@@ -42,8 +42,10 @@ export default function Register() {
     },
     validationSchema: RegisterSchema,
     onSubmit: (values) => {
-      // same shape as initial values
+
       console.log("values => ", values);
+      process.exit()
+     
       registerProcess(values).then(res => {
         if(res.data.success) { 
         
@@ -62,7 +64,7 @@ export default function Register() {
       <Col xs={24} sm={24} xl={24}>
         <h1>Register</h1>
 
-        <form method="post" layout="vertical" onSubmit={formik.handleSubmit}>
+        <Form method="post" layout="vertical" onFinish={formik.handleSubmit}>
           <Form.Item label="Name">
             <Input
               type="text"
@@ -146,19 +148,20 @@ export default function Register() {
               </span>
             )}
           </Form.Item>
+          <Form.Item label="image">
+              <Input type="file" name="image"></Input>
+          </Form.Item>
 
           <div>
-            {/* <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit">
               Register
-            </Button> */}
-            <button type="submit">
-              Register
-            </button>
+            </Button>
+            
           </div>
           <div className="login-link">
             <a href="/login"> Already had Account ? Login here </a>
           </div>
-        </form>
+        </Form>
       </Col>
     </Row>
   );

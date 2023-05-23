@@ -8,6 +8,7 @@ import Profile from "./pages/profile";
 import Tweet from "./pages/tweet";
 import TweetDetail from "./pages/tweet-detail";
 import Unauthorized from "./pages/unauthorized";
+import Sample from "./pages/sample";
 
 const PrivateRoute = (props) => {
   const userLogin = localStorage.getItem("userLogin") ? JSON.parse(localStorage.getItem("userLogin")) : {}
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
   {
     path: "/profile/:username",
     element: <Profile></Profile>,
+  },
+  {
+    path:"/sample",
+    element:<Sample></Sample>
   },
   {
     path: "/test",

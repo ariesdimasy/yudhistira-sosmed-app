@@ -24,11 +24,13 @@ export function postTweet(data) {
     {
       tweet: data.tweet,
       imageUrl: data.imageUrl,
+      image:data.image,
       userId: userLogin.id,
     },
     {
       headers: {
-        authorization:`Bearer ${userLogin?.token}`
+        authorization:`Bearer ${userLogin?.token}`,
+        "Content-Type":"multipart/form-data"
       },
     }
   );
