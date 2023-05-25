@@ -14,11 +14,11 @@ export default function Tweet() {
       if(res.data.success) { 
         setTweets(res.data.data)
       } else { 
-        alert(JSON.stringify(res.data.message))
+       console.log(res.data.message)
       }
     })
     .catch(err => {
-      alert(JSON.stringify(err))
+      console.log(err)
     })
   },[])
 

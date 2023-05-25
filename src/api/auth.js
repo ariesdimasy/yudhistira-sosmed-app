@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const userLogin = localStorage.getItem("userLogin") ? JSON.parse(localStorage?.getItem("userLogin")) : {}
+
 export function loginProcess(data) {
   return axios.post(
     process.env.REACT_APP_API_URL + "/auth/login",
@@ -30,4 +32,26 @@ export function registerProcess(data) {
       headers: {},
     }
   );
+}
+
+export function checkToken() { 
+  return axios.get("check-token", {
+    headers: {
+      authorization:'Bearer '+userLogin?.token
+    }
+  })
+}
+
+export function requestForgotPassword(email) { 
+  return axios.post(process.env.REACT_APP_API_URL + "/auth/request/forgot-password",{
+    email:email
+  })
+}
+
+export function forgotPassword(data) { 
+  return axios.post(process.env.REACT_APP_API_URL + "/auth/forgot-password",{
+    email:data.email,
+    password: data.password,
+    passwordConfirm : data.passwordConfirm
+  })
 }

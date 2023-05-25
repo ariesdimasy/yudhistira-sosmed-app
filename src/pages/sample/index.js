@@ -21,6 +21,7 @@ export default function Sample() {
         .catch(err => {
 
         })
+        alert("success")
     } 
 
     return (

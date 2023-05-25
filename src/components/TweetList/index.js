@@ -41,8 +41,8 @@ export default function TweetList(props) {
 
   return (
     <div className="tweet-list">
-      {props.tweetList.map((item) => {
-        return <TweetCard tweet={item} isDetail></TweetCard>;
+      {props.tweetList.map((item, index) => {
+        return <TweetCard tweet={item} isDetail key={index}></TweetCard>;
       })}
       <Pagination defaultCurrent={1} total={50} />
     </div>

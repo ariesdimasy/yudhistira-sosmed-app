@@ -1,5 +1,5 @@
 import "./App.css";
-import { createBrowserRouter, RouterProvider, useNavigate, Navigate} from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate} from "react-router-dom";
 
 import Layout from "./layout";
 import Login from "./pages/login";
@@ -9,11 +9,15 @@ import Tweet from "./pages/tweet";
 import TweetDetail from "./pages/tweet-detail";
 import Unauthorized from "./pages/unauthorized";
 import Sample from "./pages/sample";
+import Activation from "./pages/activation";
+import ForgotPassword from "./pages/forgot-password";
+import RequestActivation from "./pages/request-activation";
+import RequestForgotPassword from "./pages/request-forgot-password";
 
 const PrivateRoute = (props) => {
   const userLogin = localStorage.getItem("userLogin") ? JSON.parse(localStorage.getItem("userLogin")) : {}
   //const navigate = useNavigate()
-  if(userLogin?.token) { 
+  if(userLogin?.token) {
     return props.children
   } else { 
     //return navigate("/login")
@@ -65,6 +69,22 @@ const router = createBrowserRouter([
   {
     path: "/profile/:username",
     element: <Profile></Profile>,
+  },
+  {
+    path:"/activation",
+    element:<Activation></Activation>
+  },
+  {
+    path:"/forgot-password",
+    element:<ForgotPassword></ForgotPassword>
+  },
+  {
+    path:"/request/activation",
+    element:<RequestActivation />
+  },
+  {
+    path:"/request/forgot-password",
+    element:<RequestForgotPassword />
   },
   {
     path:"/sample",

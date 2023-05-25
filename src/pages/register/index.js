@@ -44,7 +44,6 @@ export default function Register() {
     onSubmit: (values) => {
 
       console.log("values => ", values);
-      process.exit()
      
       registerProcess(values).then(res => {
         if(res.data.success) { 
